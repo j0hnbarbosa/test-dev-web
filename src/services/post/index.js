@@ -1,10 +1,19 @@
 import {
-  configAxios,
+  api,
 } from '../client';
 
-const instance = configAxios();
+
+export const postAuthentication = async ({ email, password }) => {
+  const result = await api.post('/auth/login', { email, password });
+  return result;
+};
 
 export const postRegisterUser = async (data) => {
-  const result = await instance.post('/register_user', { data });
+  const result = await api.post('/register_contact', { data });
+  console.log(result)
+  if (result.error) {
+    return result
+  }
+
   return result.data;
 };
